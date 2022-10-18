@@ -1,30 +1,35 @@
-import { findRoute } from './findRoute';
+import { boardAvailable } from './boardAvailable';
+import { closest } from './closest';
 import { move } from './lib/move';
 import { onTick } from './lib/onTick';
+import { panic } from './panic';
 import { config } from './state/config';
 import { Direction } from './types/Direction';
 
-onTick((snake, apple) => {
-  const head = snake.at(-1)!;
+onTick((snake, apple, direction) => {
+  try {
+    const head = snake.at(-1)!;
 
-  // get closer to the apple
-  const route = findRoute(snake.slice(), apple, true);
+    if (boardAvailable(snake.slice()).amtOfBoardAvailable <= 0.8) return panic(snake, direction);
 
-  if (!route) return;
+    const route = closest(snake.slice(), apple, direction);
 
-  const nextHead = route.at(-2)!;
+    if (!route) return panic(snake, direction);
 
-  if (nextHead.x > head.x) {
-    if (head.x + 1 < config.widthUnitAmt) move(Direction.Right);
-  } else if (nextHead.x < head.x) {
-    if (head.x - 1 >= 0) move(Direction.Left);
-  }
+    const nextHead = route.at(-2)!;
 
-  if (nextHead.y > head.y) {
-    if (head.y + 1 < config.heightUnitAmt) move(Direction.Down);
-  } else if (nextHead.y < head.y) {
-    if (head.y - 1 >= 0) move(Direction.Up);
-  }
+    if (nextHead.x > head.x) {
+      if (head.x + 1 < config.widthUnitAmt) move(Direction.Right);
+    } else if (nextHead.x < head.x) {
+      if (head.x - 1 >= 0) move(Direction.Left);
+    }
+
+    if (nextHead.y > head.y) {
+      if (head.y + 1 < config.heightUnitAmt) move(Direction.Down);
+    } else if (nextHead.y < head.y) {
+      if (head.y - 1 >= 0) move(Direction.Up);
+    }
+  } catch {}
 });
 
 export {};
