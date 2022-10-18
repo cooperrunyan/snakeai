@@ -66,8 +66,7 @@ export function closest(snake: Segment[], apple: Apple, direction: Direction) {
         if (direction === Direction.Left && neighbor.x - 1 === current.x) continue;
         if (direction === Direction.Right && neighbor.x + 1 === current.x) continue;
 
-        if (current.x === snake.at(-1)!.x && current.y === snake.at(-1)!.y && boardAvailable([...snake.slice(1), neighbor]).amtOfBoardAvailable <= 0.8)
-          continue;
+        if (current.x === snake.at(-1)!.x && current.y === snake.at(-1)!.y && boardAvailable([...snake.slice(1), neighbor]) <= 0.8) continue;
 
         const tempG = current.g + 1;
 

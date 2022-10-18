@@ -1,16 +1,19 @@
 import { boardAvailable } from './boardAvailable';
 import { closest } from './closest';
+import { init } from './init';
 import { move } from './lib/move';
 import { onTick } from './lib/onTick';
 import { panic } from './panic';
 import { config } from './state/config';
 import { Direction } from './types/Direction';
 
+init(true);
+
 onTick((snake, apple, direction) => {
   try {
     const head = snake.at(-1)!;
 
-    if (boardAvailable(snake.slice()).amtOfBoardAvailable <= 0.8) return panic(snake, direction);
+    if (boardAvailable(snake.slice()) <= 0.8) return panic(snake, direction);
 
     const route = closest(snake.slice(), apple, direction);
 
