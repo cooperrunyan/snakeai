@@ -7,13 +7,12 @@ import { Direction } from './types/Direction';
 import { Segment } from './types/Segment';
 
 export function panic(snake: Segment[], direction: Direction) {
-  console.log('panicking');
   const head = snake.at(-1)!;
 
   const possible = findNeighbors(snake.at(-1)!, buildGrid(snake))
     .map(n => ({
       node: n,
-      available: boardAvailable([n, ...snake.slice(1)]).amtOfBoardAvailable,
+      available: boardAvailable([n, ...snake.slice(1)]),
     }))
     .filter(cell => {
       if (direction === Direction.Up && cell.node.y - 1 === head.y) return false;
