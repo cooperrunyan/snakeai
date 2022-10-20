@@ -15,8 +15,7 @@ onTick((snake, apple, direction) => {
 
     if (boardAvailable(snake.slice()) <= 0.8) return panic(snake, direction);
 
-    const progress = snake.length / (config.heightUnitAmt * config.widthUnitAmt);
-    console.log(progress);
+    // const progress = snake.length / (config.heightUnitAmt * config.widthUnitAmt);
     // const route = progress >= 0.25 ? furthest(snake.slice(), apple, direction) : closest(snake.slice(), apple, direction);
 
     const route = closest(snake.slice(), apple, direction);
