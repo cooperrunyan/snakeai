@@ -7,7 +7,7 @@ import { panic } from './panic';
 import { config } from './state/config';
 import { Direction } from './types/Direction';
 
-init(false);
+init(true);
 
 onTick((snake, apple, direction) => {
   try {
@@ -24,16 +24,16 @@ onTick((snake, apple, direction) => {
 
     const nextHead = route.at(-2)!;
 
-    if (nextHead.x > head.x) {
-      if (head.x + 1 < config.widthUnitAmt) move(Direction.Right);
-    } else if (nextHead.x < head.x) {
-      if (head.x - 1 >= 0) move(Direction.Left);
+    if (nextHead.x > head[1]) {
+      if (head[1] + 1 < config.widthUnitAmt) move(Direction.Right);
+    } else if (nextHead.x < head[1]) {
+      if (head[1] - 1 >= 0) move(Direction.Left);
     }
 
-    if (nextHead.y > head.y) {
-      if (head.y + 1 < config.heightUnitAmt) move(Direction.Down);
-    } else if (nextHead.y < head.y) {
-      if (head.y - 1 >= 0) move(Direction.Up);
+    if (nextHead.y > head[2]) {
+      if (head[2] + 1 < config.heightUnitAmt) move(Direction.Down);
+    } else if (nextHead.y < head[2]) {
+      if (head[2] - 1 >= 0) move(Direction.Up);
     }
   } catch {}
 });

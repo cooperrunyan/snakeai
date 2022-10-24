@@ -45,11 +45,9 @@ export function boardAvailable(snake: Segment[]) {
     }
   };
 
-  addNeighbors(grid.at(head.x)!.at(head.y)!);
+  addNeighbors(grid.at(head[1])!.at(head[2])!);
 
   const v = accessibleNodeCoordinates.size / grid.flatMap(row => row.filter(node => !node.wall)).length;
-
-  console.log(v);
 
   return v;
 }

@@ -25,8 +25,8 @@ export function furthest(snake: Segment[], apple: Apple, direction: Direction) {
         f: 0,
         g: 0,
         h: 0,
-        x: snake.at(-1)!.x,
-        y: snake.at(-1)!.y,
+        x: snake.at(-1)![1],
+        y: snake.at(-1)![2],
         wall: false,
       },
     ];
@@ -38,7 +38,7 @@ export function furthest(snake: Segment[], apple: Apple, direction: Direction) {
         .slice()
         .sort((a, b) => a.f - b.f)
         .at(-1)!;
-      if (current.x === apple.x && current.y === apple.y) {
+      if (current.x === apple[0] && current.y === apple[1]) {
         path = [];
 
         let temp = current;
@@ -97,8 +97,8 @@ export function furthest(snake: Segment[], apple: Apple, direction: Direction) {
 
 function heuristic(neighbor: Cell, apple: Apple): number {
   // euclidian
-  return Math.sqrt(Math.pow(apple.y - neighbor.y, 2) + Math.pow(apple.x - neighbor.x, 2));
+  return Math.sqrt(Math.pow(apple[1] - neighbor.y, 2) + Math.pow(apple[0] - neighbor.x, 2));
 
   // manhattan
-  // return Math.abs(apple.y - neighbor.y) + Math.abs(apple.x - neighbor.x);
+  // return Math.abs(apple[1] - neighbor.y) + Math.abs(apple[0] - neighbor.x);
 }

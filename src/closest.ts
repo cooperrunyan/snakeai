@@ -26,8 +26,8 @@ export function closest(snake: Segment[], apple: Apple, direction: Direction) {
         f: 0,
         g: 0,
         h: 0,
-        x: snake.at(-1)!.x,
-        y: snake.at(-1)!.y,
+        x: snake.at(-1)![1],
+        y: snake.at(-1)![2],
         wall: false,
       },
     ];
@@ -36,7 +36,7 @@ export function closest(snake: Segment[], apple: Apple, direction: Direction) {
 
     while (openSet.length !== 0) {
       const current = openSet.slice().sort((a, b) => a.f - b.f)[0]!;
-      if (current.x === apple.x && current.y === apple.y) {
+      if (current.x === apple[0] && current.y === apple[1]) {
         path = [];
 
         let temp = current;
@@ -57,7 +57,7 @@ export function closest(snake: Segment[], apple: Apple, direction: Direction) {
       closedSet.push(current);
 
       // neighbors
-      const neighbors = findNeighbors(current, grid);
+      const neighbors = findNeighbors(['', current.x, current.y], grid);
 
       for (const neighbor of neighbors) {
         if (closedSet.includes(neighbor) || neighbor.wall) continue;
@@ -66,21 +66,16 @@ export function closest(snake: Segment[], apple: Apple, direction: Direction) {
         if (direction === Direction.Left && neighbor.x - 1 === current.x) continue;
         if (direction === Direction.Right && neighbor.x + 1 === current.x) continue;
 
-        if (current.x === snake.at(-1)!.x && current.y === snake.at(-1)!.y)
-          console.log([...snake.slice(1).map((n, i) => (i === snake.length - 1 ? { ...n, wall: true } : n)), neighbor]);
-        if (
-          current.x === snake.at(-1)!.x &&
-          current.y === snake.at(-1)!.y &&
-          boardAvailable([...snake.slice(1), { x: neighbor.x, y: neighbor.y } as any]) <= 0.7
-        )
+        if (current.x === snake.at(-1)![1] && current.y === snake.at(-1)![2]) console.log([...snake.slice(1), ['', neighbor.x, neighbor.y] as any]);
+        if (current.x === snake.at(-1)![1] && current.y === snake.at(-1)![2] && boardAvailable([...snake.slice(1), ['', neighbor.x, neighbor.y] as any]) <= 0.7)
           continue;
 
-        const tempG = current.g + 1;
+        const tentativeG = current.g + 1;
 
         if (openSet.includes(neighbor)) {
-          if (tempG < neighbor.g) neighbor.g = tempG;
+          if (tentativeG < neighbor.g) neighbor.g = tentativeG;
         } else {
-          neighbor.g = tempG;
+          neighbor.g = tentativeG;
           openSet.push(neighbor);
         }
 
@@ -99,7 +94,7 @@ export function closest(snake: Segment[], apple: Apple, direction: Direction) {
 
 function heuristic(neighbor: Cell, apple: Apple): number {
   // euclidian
-  return Math.sqrt(Math.pow(apple.y - neighbor.y, 2) + Math.pow(apple.x - neighbor.x, 2));
+  return Math.sqrt(Math.pow(apple[1] - neighbor.y, 2) + Math.pow(apple[0] - neighbor.x, 2));
 
   // manhattan
   // return Math.abs(apple.y - neighbor.y) + Math.abs(apple.x - neighbor.x);

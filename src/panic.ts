@@ -12,13 +12,13 @@ export function panic(snake: Segment[], direction: Direction) {
   const possible = findNeighbors(snake.at(-1)!, buildGrid(snake))
     .map(n => ({
       node: n,
-      available: boardAvailable([n, ...snake.slice(1)]),
+      available: boardAvailable([{ x: n.x, y: n.y } as any, ...snake.slice(1)]),
     }))
     .filter(cell => {
-      if (direction === Direction.Up && cell.node.y - 1 === head.y) return false;
-      if (direction === Direction.Down && cell.node.y + 1 === head.y) return false;
-      if (direction === Direction.Left && cell.node.x - 1 === head.x) return false;
-      if (direction === Direction.Right && cell.node.x + 1 === head.x) return false;
+      if (direction === Direction.Up && cell.node.y - 1 === head[2]) return false;
+      if (direction === Direction.Down && cell.node.y + 1 === head[2]) return false;
+      if (direction === Direction.Left && cell.node.x - 1 === head[1]) return false;
+      if (direction === Direction.Right && cell.node.x + 1 === head[1]) return false;
       if (cell.node.wall) return false;
 
       return true;
@@ -27,15 +27,15 @@ export function panic(snake: Segment[], direction: Direction) {
 
   const bestNode = possible[0]!.node;
 
-  if (bestNode.x > head.x) {
-    if (head.x + 1 < config.widthUnitAmt) move(Direction.Right);
-  } else if (bestNode.x < head.x) {
-    if (head.x - 1 >= 0) move(Direction.Left);
+  if (bestNode.x > head[1]) {
+    if (head[1] + 1 < config.widthUnitAmt) move(Direction.Right);
+  } else if (bestNode.x < head[1]) {
+    if (head[1] - 1 >= 0) move(Direction.Left);
   }
 
-  if (bestNode.y > head.y) {
-    if (head.y + 1 < config.heightUnitAmt) move(Direction.Down);
-  } else if (bestNode.y < head.y) {
-    if (head.y - 1 >= 0) move(Direction.Up);
+  if (bestNode.y > head[2]) {
+    if (head[2] + 1 < config.heightUnitAmt) move(Direction.Down);
+  } else if (bestNode.y < head[2]) {
+    if (head[2] - 1 >= 0) move(Direction.Up);
   }
 }

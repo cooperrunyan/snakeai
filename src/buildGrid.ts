@@ -2,7 +2,7 @@ import { config } from './state/config';
 import { Cell } from './types/Cell';
 import { Segment } from './types/Segment';
 
-export function buildGrid(snake: (Segment | Cell)[]) {
+export function buildGrid(snake: Segment[]) {
   const grid: Cell[][] = [];
 
   const cols = config.widthUnitAmt;
@@ -23,7 +23,7 @@ export function buildGrid(snake: (Segment | Cell)[]) {
   }
 
   for (const segment of snake.slice(0, -1)) {
-    if (grid.at(segment.x)?.at(segment.y)) grid.at(segment.x)!.at(segment.y)!.wall = true;
+    if (grid.at(segment[1])?.at(segment[2])) grid.at(segment[1])!.at(segment[2])!.wall = true;
   }
 
   return grid;
