@@ -2,11 +2,11 @@ import { Apple } from '../types/Apple';
 import { Direction } from '../types/Direction';
 import { Segment } from '../types/Segment';
 
-export function onTick(callback: (snake: Segment[], apple: Apple, direction: Direction) => void) {
+export function onTick(callback: (snake: Segment[], apple: Apple, direction: Direction, died: boolean) => void) {
   window.addEventListener(
     'message',
     e => {
-      if (e.data.type === 'tick') callback(e.data.snake, e.data.apple, e.data.direction);
+      if (e.data.type === 'tick') callback(e.data.snake, e.data.apple, e.data.direction, e.data.died);
     },
     false,
   );
