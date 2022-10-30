@@ -1,6 +1,6 @@
-import { config } from './state/config';
-import { Cell } from './types/Cell';
-import { Segment } from './types/Segment';
+import { config } from '../state/config';
+import { Cell } from '../types/Cell';
+import { Segment } from '../types/Segment';
 
 export function buildGrid(snake: Segment[]) {
   const grid: Cell[][] = [];

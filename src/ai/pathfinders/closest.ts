@@ -1,10 +1,10 @@
-import { boardAvailable } from './boardAvailable';
-import { buildGrid } from './buildGrid';
-import { findNeighbors } from './findNeighbors';
-import { Apple } from './types/Apple';
-import { Cell } from './types/Cell';
-import { Direction } from './types/Direction';
-import { Segment } from './types/Segment';
+import { buildGrid } from '../lib/buildGrid';
+import { findNeighbors } from '../lib/findNeighbors';
+import { boardAvailable } from '../lib/boardAvailable';
+import { Apple } from '../types/Apple';
+import { Cell } from '../types/Cell';
+import { Direction } from '../types/Direction';
+import { Segment } from '../types/Segment';
 
 export function closest(snake: Segment[], apple: Apple, _direction: Direction) {
   try {
@@ -52,10 +52,6 @@ export function closest(snake: Segment[], apple: Apple, _direction: Direction) {
 
       for (const neighbor of neighbors) {
         if (closedSet.includes(neighbor) || neighbor.wall || snake.map(s => s[1] + ' ' + s[2]).includes(neighbor.x + ' ' + neighbor.y)) continue;
-        // if (direction === Direction.Up && neighbor.y - 1 === current.y && neighbor.x === current.x) continue;
-        // if (direction === Direction.Down && neighbor.y + 1 === current.y && neighbor.x === current.x) continue;
-        // if (direction === Direction.Left && neighbor.x + 1 === current.x && neighbor.y === current.y) continue;
-        // if (direction === Direction.Right && neighbor.x - 1 === current.x && neighbor.y === current.y) continue;
 
         if (
           current.x === snake.at(-1)![1] &&

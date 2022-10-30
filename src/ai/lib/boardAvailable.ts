@@ -1,7 +1,7 @@
+import { config } from '../state/config';
+import { Cell } from '../types/Cell';
+import { Segment } from '../types/Segment';
 import { buildGrid } from './buildGrid';
-import { config } from './state/config';
-import { Cell } from './types/Cell';
-import { Segment } from './types/Segment';
 
 export function boardAvailable(snake: Segment[]) {
   const grid = buildGrid(snake);
