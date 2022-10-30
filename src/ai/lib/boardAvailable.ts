@@ -1,6 +1,6 @@
 import { config } from '../../state/config';
-import { Cell } from '../types/Cell';
-import { Segment } from '../types/Segment';
+import { Cell } from '../../types/Cell';
+import { Segment } from '../../types/Segment';
 import { buildGrid } from './buildGrid';
 
 export function boardAvailable(snake: Segment[]) {
@@ -20,7 +20,7 @@ export function boardAvailable(snake: Segment[]) {
     )
       neighbors.push(grid.at(node.x - 1)?.at(node.y)!);
     if (
-      node.x + 1 < config.widthUnitAmt &&
+      node.x + 1 < config.value.widthUnitAmt &&
       !grid.at(node.x + 1)?.at(node.y)?.wall &&
       !accessibleNodeCoordinates.has(`${grid.at(node.x + 1)?.at(node.y)!.x} ${grid.at(node.x + 1)?.at(node.y)!.y}`)
     )
@@ -32,7 +32,7 @@ export function boardAvailable(snake: Segment[]) {
     )
       neighbors.push(grid.at(node.x)?.at(node.y - 1)!);
     if (
-      node.y + 1 < config.heightUnitAmt &&
+      node.y + 1 < config.value.heightUnitAmt &&
       !grid.at(node.x)?.at(node.y + 1)?.wall &&
       !accessibleNodeCoordinates.has(`${grid.at(node.x)?.at(node.y + 1)!.x} ${grid.at(node.x)?.at(node.y + 1)!.y}`)
     )

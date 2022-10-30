@@ -1,10 +1,10 @@
+import { Apple } from '../../types/Apple';
+import { Cell } from '../../types/Cell';
+import { Direction } from '../../types/Direction';
+import { Segment } from '../../types/Segment';
+import { boardAvailable } from '../lib/boardAvailable';
 import { buildGrid } from '../lib/buildGrid';
 import { findNeighbors } from '../lib/findNeighbors';
-import { boardAvailable } from '../lib/boardAvailable';
-import { Apple } from '../types/Apple';
-import { Cell } from '../types/Cell';
-import { Direction } from '../types/Direction';
-import { Segment } from '../types/Segment';
 
 export function closest(snake: Segment[], apple: Apple, _direction: Direction) {
   try {

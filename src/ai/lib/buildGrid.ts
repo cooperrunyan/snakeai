@@ -1,12 +1,12 @@
 import { config } from '../../state/config';
-import { Cell } from '../types/Cell';
-import { Segment } from '../types/Segment';
+import { Cell } from '../../types/Cell';
+import { Segment } from '../../types/Segment';
 
 export function buildGrid(snake: Segment[]) {
   const grid: Cell[][] = [];
 
-  const cols = config.widthUnitAmt;
-  const rows = config.heightUnitAmt;
+  const cols = config.value.widthUnitAmt;
+  const rows = config.value.heightUnitAmt;
 
   for (let x = 0; x < cols; x++) {
     grid[x] = new Array(rows);

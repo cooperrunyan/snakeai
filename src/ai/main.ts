@@ -1,11 +1,11 @@
 import { closest } from './pathfinders/closest';
 import { panic } from './pathfinders/panic';
 
+import { Apple } from '../types/Apple';
+import { Direction } from '../types/Direction';
+import { Segment } from '../types/Segment';
 import { boardAvailable } from './lib/boardAvailable';
 import { relativeDirection } from './lib/relativeDirection';
-import { Apple } from './types/Apple';
-import { Direction } from './types/Direction';
-import { Segment } from './types/Segment';
 
 export function getMove(snake: Segment[], apple: Apple, direction: Direction) {
   try {

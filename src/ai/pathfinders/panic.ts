@@ -1,9 +1,9 @@
 import { config } from '../../state/config';
+import { Direction } from '../../types/Direction';
+import { Segment } from '../../types/Segment';
 import { boardAvailable } from '../lib/boardAvailable';
 import { buildGrid } from '../lib/buildGrid';
 import { findNeighbors } from '../lib/findNeighbors';
-import { Direction } from '../types/Direction';
-import { Segment } from '../types/Segment';
 
 export function panic(snake: Segment[], direction: Direction) {
   const head = snake.at(-1)!;
@@ -27,13 +27,13 @@ export function panic(snake: Segment[], direction: Direction) {
   const bestNode = possible[0]!.node;
 
   if (bestNode.x > head[1]) {
-    if (head[1] + 1 < config.widthUnitAmt) return Direction.Right;
+    if (head[1] + 1 < config.value.widthUnitAmt) return Direction.Right;
   } else if (bestNode.x < head[1]) {
     if (head[1] - 1 >= 0) return Direction.Left;
   }
 
   if (bestNode.y > head[2]) {
-    if (head[2] + 1 < config.heightUnitAmt) return Direction.Down;
+    if (head[2] + 1 < config.value.heightUnitAmt) return Direction.Down;
   } else if (bestNode.y < head[2]) {
     if (head[2] - 1 >= 0) return Direction.Up;
   }

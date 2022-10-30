@@ -1,0 +1,50 @@
+:root {
+  --primary: #00ff00;
+  --secondary: #ff0000;
+  --bg: #000000;
+  --fg: #ffffff;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+#game {
+  width: 100vw;
+  height: 100vh;
+  border: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+
+  background-color: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+}
+
+.Grid {
+  display: grid;
+  grid-template-columns: repeat(var(--widthUnitAmt), var(--widthUnit));
+  grid-template-rows: repeat(var(--heightUnitAmt), var(--heightUnit));
+}
+
+.Segment {
+  color: var(--primary);
+  background-color: currentColor;
+  box-shadow: var(--shadow);
+}
+
+.Apple {
+  color: var(--secondary);
+  border: 1px solid var(--bg);
+}
