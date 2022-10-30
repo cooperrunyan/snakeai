@@ -1,3 +1,7 @@
+:root {
+  --bg: black;
+}
+
 *,
 *::before,
 *::after {
@@ -5,7 +9,7 @@
   padding: 0;
 }
 
-iframe {
+#game {
   width: 100vw;
   height: 100vh;
   border: 0;
@@ -17,4 +21,5 @@ html,
 body {
   overscroll-behavior: none;
   overflow: hidden;
+  background-color: var(--bg);
 }
