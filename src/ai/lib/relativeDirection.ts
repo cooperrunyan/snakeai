@@ -1,4 +1,4 @@
-import { config } from '../state/config';
+import { config } from '../../state/config';
 import { Direction } from '../types/Direction';
 
 export function relativeDirection([x1, y1]: [number, number], [x2, y2]: [number, number]): Direction | null {

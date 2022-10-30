@@ -1,7 +1,7 @@
-import { buildGrid } from './buildGrid';
-import { config } from '../state/config';
+import { config } from '../../state/config';
 import { Cell } from '../types/Cell';
 import { Segment } from '../types/Segment';
+import { buildGrid } from './buildGrid';
 
 export function findNeighbors(node: Segment, grid: ReturnType<typeof buildGrid>) {
   // neighbors

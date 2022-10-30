@@ -1,7 +1,7 @@
+import { config } from '../../state/config';
+import { boardAvailable } from '../lib/boardAvailable';
 import { buildGrid } from '../lib/buildGrid';
 import { findNeighbors } from '../lib/findNeighbors';
-import { boardAvailable } from '../lib/boardAvailable';
-import { config } from '../state/config';
 import { Direction } from '../types/Direction';
 import { Segment } from '../types/Segment';
 
