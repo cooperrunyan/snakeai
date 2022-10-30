@@ -6,7 +6,7 @@ import { Cell } from './types/Cell';
 import { Direction } from './types/Direction';
 import { Segment } from './types/Segment';
 
-export function closest(snake: Segment[], apple: Apple, direction: Direction) {
+export function closest(snake: Segment[], apple: Apple, _direction: Direction) {
   try {
     const grid = buildGrid(snake);
 
@@ -48,16 +48,20 @@ export function closest(snake: Segment[], apple: Apple, direction: Direction) {
       closedSet.push(current);
 
       // neighbors
-      const neighbors = findNeighbors(['', current.x, current.y], grid);
+      const neighbors = findNeighbors(['0000', current.x, current.y], grid);
 
       for (const neighbor of neighbors) {
-        if (closedSet.includes(neighbor) || neighbor.wall) continue;
-        if (direction === Direction.Up && neighbor.y - 1 === current.y && neighbor.x === current.x) continue;
-        if (direction === Direction.Down && neighbor.y + 1 === current.y && neighbor.x === current.x) continue;
-        if (direction === Direction.Left && neighbor.x + 1 === current.x && neighbor.y === current.y) continue;
-        if (direction === Direction.Right && neighbor.x - 1 === current.x && neighbor.y === current.y) continue;
+        if (closedSet.includes(neighbor) || neighbor.wall || snake.map(s => s[1] + ' ' + s[2]).includes(neighbor.x + ' ' + neighbor.y)) continue;
+        // if (direction === Direction.Up && neighbor.y - 1 === current.y && neighbor.x === current.x) continue;
+        // if (direction === Direction.Down && neighbor.y + 1 === current.y && neighbor.x === current.x) continue;
+        // if (direction === Direction.Left && neighbor.x + 1 === current.x && neighbor.y === current.y) continue;
+        // if (direction === Direction.Right && neighbor.x - 1 === current.x && neighbor.y === current.y) continue;
 
-        if (current.x === snake.at(-1)![1] && current.y === snake.at(-1)![2] && boardAvailable([...snake.slice(1), ['', neighbor.x, neighbor.y] as any]) <= 0.7)
+        if (
+          current.x === snake.at(-1)![1] &&
+          current.y === snake.at(-1)![2] &&
+          boardAvailable([...snake.slice(1), ['0000', neighbor.x, neighbor.y] as any]).amt <= snake.length
+        )
           continue;
 
         const tentativeG = current.g + 1;

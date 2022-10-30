@@ -1,5 +1,6 @@
 import { boardAvailable } from './boardAvailable';
 import { closest } from './closest';
+
 import { init } from './init';
 import { move } from './lib/move';
 import { onTick } from './lib/onTick';
@@ -9,7 +10,7 @@ import { config } from './state/config';
 // import { Cell } from './types/Cell';
 import { Direction } from './types/Direction';
 
-init(true);
+init(false);
 
 // let lastApple: Apple = [-1, -1];
 // let route: Cell[] = [];
@@ -18,7 +19,7 @@ onTick((snake, apple, direction /*died*/) => {
   try {
     const head = snake.at(-1)!;
 
-    if (boardAvailable(snake.slice()) <= 0.8) return panic(snake, direction);
+    if (boardAvailable(snake.slice()).percent <= 0.8) return panic(snake, direction);
 
     // if (route.at(-1) && !died && lastApple[0] + ' ' + lastApple[1] === apple[0] + ' ' + apple[1] && !route.at(-1)?.wall) route = route.slice(0, -1);
     // else route = closest(snake.slice(), apple, direction) || [];
